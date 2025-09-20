@@ -1,15 +1,19 @@
-from flask import render_template
-from flask import Flask
-app = Flask(__name__)
-from datetime import datetime
+from flask import Flask, render_template
 
-@app.route("/hello/")
-@app.route("/hello/<name>")
-def hello_there(name = None):
-    return render_template(
-        "index.html",
-        name=name,
-        date=datetime.now()
-    )
+app = Flask(__name__)
+
+@app.route('/social')
+def social_links():
+    # List of social media sites
+    links = {
+        "Facebook": "https://www.facebook.com",
+        "Twitter": "https://www.twitter.com",
+        "Instagram": "https://www.instagram.com",
+        "LinkedIn": "https://www.linkedin.com",
+        "YouTube": "https://www.youtube.com"
+    }
+    return render_template("social.html", links=links)
+
 if __name__ == '__main__':
-   app.run()
+    app.run(debug=True, port=5001)
+
